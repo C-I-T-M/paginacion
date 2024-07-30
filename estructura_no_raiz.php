@@ -20,7 +20,7 @@ $tabla_consultas = array();    //Crear arreglo vacíio en el que se ingresarán 
 //Crear matriz que almacene todos los valores de la tabla (Array bidimencional)
 if ($consultas->num_rows > 0) {
     while ($consulta = $consultas->fetch_assoc()) {
-        array_push($tabla_consultas, array("fila1" => $consulta['fila1'], "fila2" => $consulta['fila2'], "fila3" => $consulta['fila3'], ... , "filaN" => $consulta['filaN']));
+        array_push($tabla_consultas, array("columna1" => $consulta['columna1'], "columna2" => $consulta['columna2'], "columna3" => $consulta['columna3'], ... , "culumnaN" => $consulta['culumnaN']));
     }
 }
 
@@ -33,7 +33,7 @@ $cantidad_pag = count($tabla_consultas) - 1; //*Cuenta los elementos del array p
 //*Visualización del array
 //!                                                                                                    array([0], [1], ...)                                                                                                     Rojo: Paginas de la tabla 
 //?                                           [0] => array([0], [1], ...)                                                                                  [1] => array([0], [1], ...)                                          Azul: Filas de de la tabla por pagina
-//* [0] => array(["fila1"], ["fila2"], ... , ["filaN"])    [1] => array(["fila1"], ["fila2"], ... , ["filaN"])      [0] => array(["fila1"], ["fila2"], ... , ["filaN"])    [1] => array(["fila1"], ["fila2"], ... , ["filaN"])  Verde: Datos de la tabla por fila
+//* [0] => array(["columna1"], ["columna2"], ... , ["culumnaN"])    [1] => array(["columna1"], ["columna2"], ... , ["culumnaN"])      [0] => array(["columna1"], ["columna2"], ... , ["culumnaN"])    [1] => array(["columna1"], ["columna2"], ... , ["culumnaN"])  Verde: Datos de la tabla por fila
 
 //Crear los grupos para la paginacion
 $grupos = array();    //*Array principal
@@ -170,11 +170,11 @@ for ($i = 0; $i <= $cantidad_pag; $i++) {
                 <table class="table table-condensed table-hover table-striped" style="font-size:11px" id="pagina" value="<?= $pagina ?>">
                     <thead>
                         <tr>
-                            <th>fila1</th>
-                            <th>fila2</th>
-                            <th>fila3</th>
+                            <th>columna1</th>
+                            <th>columna2</th>
+                            <th>columna3</th>
                             <th>...</th>
-                            <th>filaN</th>
+                            <th>culumnaN</th>
                             <th style="text-align: center;">Boton_funcion</th>
                         </tr>
                     </thead>
@@ -186,13 +186,13 @@ for ($i = 0; $i <= $cantidad_pag; $i++) {
                         if (count($tabla_consultas[$pagina]) == $num_filas) {       //Si el tamaño de las filas es igual al numero de filas deseado por el usuario, iniciar bucle for hasta el numero de filas 
                             for ($i = 0; $i <= $num_filas - 1; $i++) { ?>
                                 <tr>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['fila1'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['fila2'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['fila3'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['columna1'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['columna2'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['columna3'] ?></td>
                                     <td> <?= $tabla_consultas[$pagina][$i]['...'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['filaN'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['culumnaN'] ?></td>
                                     <td align="center">                                             <!-- En caso de querer mandar datos a una función, recordar que nuestro arreglo es de tres dimenciones-->
-                                        <button type=" button" class="btn btn-mini btn-warning " onClick="javascript:funcion(<?= $tabla_consultas[$pagina][$i]['fila1'] ?>, <?= $pagina ?>)">
+                                        <button type=" button" class="btn btn-mini btn-warning " onClick="javascript:funcion(<?= $tabla_consultas[$pagina][$i]['columna1'] ?>, <?= $pagina ?>)">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                         </button>
                                     </td>
@@ -203,13 +203,13 @@ for ($i = 0; $i <= $cantidad_pag; $i++) {
                             $tam_array = count($tabla_consultas[$pagina]);      //Si el tamaño de las filas NO es igual al numero de filas deseado por el usuario, iniciar bucle for hasta el tamaño de nuestro arreglo (filas del arreglo)
                             for ($i = 0; $i <= $tam_array - 1; $i++) { ?>
                                 <tr>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['fila1'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['fila2'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['fila3'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['columna1'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['columna2'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['columna3'] ?></td>
                                     <td> <?= $tabla_consultas[$pagina][$i]['...'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['filaN'] ?></td>
+                                    <td> <?= $tabla_consultas[$pagina][$i]['culumnaN'] ?></td>
                                     <td align="center">                                             <!-- En caso de querer mandar datos a una función, recordar que nuestro arreglo es de tres dimenciones-->
-                                        <button type=" button" class="btn btn-mini btn-warning " onClick="javascript:funcion(<?= $tabla_consultas[$pagina][$i]['fila1'] ?>, <?= $pagina ?>)">
+                                        <button type=" button" class="btn btn-mini btn-warning " onClick="javascript:funcion(<?= $tabla_consultas[$pagina][$i]['columna1'] ?>, <?= $pagina ?>)">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                         </button>
                                     </td>
