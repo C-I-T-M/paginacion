@@ -72,82 +72,80 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
     <!-- PAGINACION  -->
     <div class="form-group row">
     <div class="col-lg-4">
-            <nav aria-label="Paginacion">
-                <ul class="pagination justify-content-center">
-                    <!-- OPCIONES PARA REGRESAR AL PRINCIPIO O REGRESAR UN LUGAR -->
-                    <?php if ($pagina > 0) { ?> <!-- Si nuestra pagina es mayor a 0 (no estamos en la primera pagina) -->
-                        <li class="page-item">
-                            <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= 0 ?>)">    <!--Se manda el valor de pagina 0 cuando se elige la opción de regresar al principio -->
-                                << </a>
-                        </li>
-                        <li class="page-item">
-                            <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $pagina - 1 ?>)">  <!--Se manda el valor de la pagina actual menos uno cuando se elige la opción de regresar un lugar -->
-                                - </a>
-                        </li>
+            <ul class="pagination justify-content-center">
+                <!-- OPCIONES PARA REGRESAR AL PRINCIPIO O REGRESAR UN LUGAR -->
+                <?php if ($pagina > 0) { ?> <!-- Si nuestra pagina es mayor a 0 (no estamos en la primera pagina) -->
+                    <li class="page-item">
+                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= 0 ?>)">    <!--Se manda el valor de pagina 0 cuando se elige la opción de regresar al principio -->
+                            << </a>
+                    </li>
+                    <li class="page-item">
+                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $pagina - 1 ?>)">  <!--Se manda el valor de la pagina actual menos uno cuando se elige la opción de regresar un lugar -->
+                            - </a>
+                    </li>
+                <?php
+                } else { ?> <!-- Si nuestra pagina es 0 (estamos en la primera pagina) -->
+                    <!-- Agregar la opcion disabled dentro del class de ambas opciones para que no puedan ser usadas-->
+                    <li class="page-item disabled">                
+                        <a>
+                            << </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a>
+                            - </a>
+                    </li>
                     <?php
-                    } else { ?> <!-- Si nuestra pagina es 0 (estamos en la primera pagina) -->
-                        <!-- Agregar la opcion disabled dentro del class de ambas opciones para que no puedan ser usadas-->
-                        <li class="page-item disabled">                
-                            <a>
-                                << </a>
-                        </li>
-                        <li class="page-item disabled">
-                            <a>
-                                - </a>
-                        </li>
-                        <?php
-                    }
+                }
 
-                    //Revisar a qué grupo pertenece la página actual
-                    foreach ($grupos as $grupo) {       //Revisar los grupos 
-                        foreach ($grupo as $num) {      //Revisar los valores de cada grupo
-                            if ($pagina == $num) {      //Si la pagina actual es igual a un numero dentro del grupo, entonces encontramos el grupo actual
-                                $grupo_actual = $grupo;
-                                break;                  //Terminar los bucles foreach
-                            }
+                //Revisar a qué grupo pertenece la página actual
+                foreach ($grupos as $grupo) {       //Revisar los grupos 
+                    foreach ($grupo as $num) {      //Revisar los valores de cada grupo
+                        if ($pagina == $num) {      //Si la pagina actual es igual a un numero dentro del grupo, entonces encontramos el grupo actual
+                            $grupo_actual = $grupo;
+                            break;                  //Terminar los bucles foreach
                         }
                     }
+                }
 
-                    //Mostrar las paginaciones pertenecientes al grupo actual
-                    $tam_vec_pag = count($grupo_actual);        //Obtener el tamaño del vector del grupo actual
-                    for ($i = 0; $i < $tam_vec_pag; $i++) {     //Realizar ciclo for para mostrar las opciones de paginas de la paginación
-                        if ($pagina == $grupo_actual[$i]) {     //Resaltar la pagina en la que nos encontramos
-                        ?>
-                            <li class="page-item active">
-                                <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $grupo_actual[$i] ?>)"><?= $grupo_actual[$i] + 1 ?></a>
-                            </li>
-                        <?php
-                        } else {
-                        ?>
-                            <li class="page-item">
-                                <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $grupo_actual[$i]  ?>)"><?= $grupo_actual[$i] + 1 ?></a>
-                            </li>
-                        <?php
-                        }
-                    }
-
-                    //OPCIONES PARA AVANZAR A LA ULTIMA PAGINA O AVANZAR UN LUGAR
-                    if ($pagina < $cantidad_pag) { ?>   <!-- Si nuestra pagina es menor a la cantidad de paginas (no estamos en la ultima pagina) -->
-                        <li class="page-item">  
-                            <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $pagina + 1 ?>)"> +</a>  <!--Se manda el valor de la pagina actual más uno cuando se elige la opción de avanzar un lugar -->
-                        </li>
-                        <li class="page-item">
-                            <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $cantidad_pag ?>)"> >></a> <!--Se manda el valor del total de paginas (en otras palabras la ultima pagina) cuando se elige la opción de ir al final -->
-                        </li>
-                    <?php
-                    } else { ?> <!-- Si nuestra pagina es igual a la cantidad de paginas (ultima pagina) -->
-                        <!-- Agregar la opcion disabled dentro del class de ambas opciones para que no puedan ser usadas-->
-                        <li class="page-item disabled">
-                            <a> + </a>
-                        </li>
-                        <li class="page-item disabled">
-                            <a> >> </a>
-                        </li>
-                    <?php
-                    }
+                //Mostrar las paginaciones pertenecientes al grupo actual
+                $tam_vec_pag = count($grupo_actual);        //Obtener el tamaño del vector del grupo actual
+                for ($i = 0; $i < $tam_vec_pag; $i++) {     //Realizar ciclo for para mostrar las opciones de paginas de la paginación
+                    if ($pagina == $grupo_actual[$i]) {     //Resaltar la pagina en la que nos encontramos
                     ?>
-                </ul>
-            </nav>
+                        <li class="page-item active">
+                            <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $grupo_actual[$i] ?>)"><?= $grupo_actual[$i] + 1 ?></a>
+                        </li>
+                    <?php
+                    } else {
+                    ?>
+                        <li class="page-item">
+                            <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $grupo_actual[$i]  ?>)"><?= $grupo_actual[$i] + 1 ?></a>
+                        </li>
+                    <?php
+                    }
+                }
+
+                //OPCIONES PARA AVANZAR A LA ULTIMA PAGINA O AVANZAR UN LUGAR
+                if ($pagina < $cantidad_pag) { ?>   <!-- Si nuestra pagina es menor a la cantidad de paginas (no estamos en la ultima pagina) -->
+                    <li class="page-item">  
+                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $pagina + 1 ?>)"> +</a>  <!--Se manda el valor de la pagina actual más uno cuando se elige la opción de avanzar un lugar -->
+                    </li>
+                    <li class="page-item">
+                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $cantidad_pag ?>)"> >></a> <!--Se manda el valor del total de paginas (en otras palabras la ultima pagina) cuando se elige la opción de ir al final -->
+                    </li>
+                <?php
+                } else { ?> <!-- Si nuestra pagina es igual a la cantidad de paginas (ultima pagina) -->
+                    <!-- Agregar la opcion disabled dentro del class de ambas opciones para que no puedan ser usadas-->
+                    <li class="page-item disabled">
+                        <a> + </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a> >> </a>
+                    </li>
+                <?php
+                }
+                ?>
+            </ul>
         </div>
 
     </div>
