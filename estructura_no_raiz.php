@@ -35,24 +35,14 @@ $cantidad_pag = count($tabla_consultas) - 1; //*Cuenta los elementos del array p
 //?                                           [0] => array([0], [1], ...)                                                                                  [1] => array([0], [1], ...)                                          Azul: Filas de de la tabla por pagina
 //* [0] => array(["columna1"], ["columna2"], ... , ["culumnaN"])    [1] => array(["columna1"], ["columna2"], ... , ["culumnaN"])      [0] => array(["columna1"], ["columna2"], ... , ["culumnaN"])    [1] => array(["columna1"], ["columna2"], ... , ["culumnaN"])  Verde: Datos de la tabla por fila
 
-//Crear los grupos para la paginacion
-$grupos = array();    //*Array principal
-$grupo = array();     //*Array secundario
-$contador  = 4;       //*Limite de tamaño inicial para el array
-
+//Crear grupos para la paginacion
+$grupos = array();    //Crear el array vacío
 for ($i = 0; $i <= $cantidad_pag; $i++) {
-    if ($i == $cantidad_pag) {           //Si el indice del for es igual al tamaño de las paginas (o cantidad de paginas) se guarda el valor del indice en el array secundario y se envía todo al array principal
-        array_push($grupo, $i);
-        array_push($grupos, $grupo);
-    } elseif ($i < $contador) {     //Si el indice del if es menor al valor del contador (o limite de tamaño para el array) se guarda el valor del indice en el array secundario
-        array_push($grupo, $i);
-    } else {                        //Si ninguna condición se cumple (o en otras palabras, si el indice del array es igual a la variable contador y menor que el tamaño de paginas),
-        array_push($grupo, $i);     // se guarda el valor del indice en el array secundario, se envía todo al array principal, se limpia el array secundario y se aumenta en 5 la variable contador para 
-        array_push($grupos, $grupo);
-        $grupo = array();
-        $contador += 5;
-    }
+    array_push($grupos, $i);        //Agregar en este array los numeros desde 0 hasta la cantidad de paginas que tenemos
 }
+$grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos los numeros en grupos de 5 
+
+
 
 ?>
 
