@@ -113,7 +113,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                     if ($pagina == $grupo_actual[$i]) {     //Resaltar la pagina en la que nos encontramos
                     ?>
                         <li class="page-item active">
-                            <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $grupo_actual[$i] ?>)"><?= $grupo_actual[$i] + 1 ?></a>
+                            <a><?= $grupo_actual[$i] + 1 ?></a>
                         </li>
                     <?php
                     } else {
