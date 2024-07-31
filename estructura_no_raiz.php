@@ -72,6 +72,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
     <!-- PAGINACION  -->
     <div class="form-group row">
     <div class="col-lg-4">
+            
             <ul class="pagination justify-content-center">
                 <!-- OPCIONES PARA REGRESAR AL PRINCIPIO O REGRESAR UN LUGAR -->
                 <?php if ($pagina > 0) { ?> <!-- Si nuestra pagina es mayor a 0 (no estamos en la primera pagina) -->
@@ -170,25 +171,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                         <?php
                         //Recordar que la variable $tabla_consultas tiene la consulta que hayamos hecho, sus índices son: $tabla_consultas[PAGINA][FILA][DATO GUARDADO]
                         //el proceso siguiente no es muy diferente a cuando hacemos un while($consulta = $consultas->fetch_assoc()){}
-
-                        if (count($tabla_consultas[$pagina]) == $num_filas) {       //Si el tamaño de las filas es igual al numero de filas deseado por el usuario, iniciar bucle for hasta el numero de filas 
-                            for ($i = 0; $i <= $num_filas - 1; $i++) { ?>
-                                <tr>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['columna1'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['columna2'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['columna3'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['...'] ?></td>
-                                    <td> <?= $tabla_consultas[$pagina][$i]['culumnaN'] ?></td>
-                                    <td align="center">                                             <!-- En caso de querer mandar datos a una función, recordar que nuestro arreglo es de tres dimenciones-->
-                                        <button type=" button" class="btn btn-mini btn-warning " onClick="javascript:funcion(<?= $tabla_consultas[$pagina][$i]['columna1'] ?>, <?= $pagina ?>)">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php 
-                            }
-                        } else {
-                            $tam_array = count($tabla_consultas[$pagina]);      //Si el tamaño de las filas NO es igual al numero de filas deseado por el usuario, iniciar bucle for hasta el tamaño de nuestro arreglo (filas del arreglo)
+                            $tam_array = count($tabla_consultas[$pagina]);      
                             for ($i = 0; $i <= $tam_array - 1; $i++) { ?>
                                 <tr>
                                     <td> <?= $tabla_consultas[$pagina][$i]['columna1'] ?></td>
@@ -204,7 +187,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                                 </tr>
                         <?php
                             }
-                        } ?>
+                        ?>
                     </tbody>
                 </table>
             </div>
