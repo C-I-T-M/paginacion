@@ -72,7 +72,18 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
     <!-- PAGINACION  -->
     <div class="form-group row">
     <div class="col-lg-4">
-            
+            <?php
+    		//Revisar a qué grupo pertenece la página actual
+    		foreach ($grupos as $key => $grupo) {       //Revisar los grupos 
+    			foreach ($grupo as $num) {      //Revisar los valores de cada grupo
+    				if ($pagina == $num) {      //Si la pagina actual es igual a un numero dentro del grupo, entonces encontramos el grupo actual
+    					$grupo_actual = $grupo;
+    					$key_grupo = $key;		//Guardar la clave del grupo actual
+    					break;                  //Terminar los bucles foreach
+    				}
+    			}
+    		}
+    		?>
             <ul class="pagination justify-content-center">
                 <!-- OPCIONES PARA REGRESAR AL PRINCIPIO O REGRESAR UN LUGAR -->
                 <?php if ($pagina > 0) { ?> <!-- Si nuestra pagina es mayor a 0 (no estamos en la primera pagina) -->
@@ -81,7 +92,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                             << </a>
                     </li>
                     <li class="page-item">
-                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $pagina - 1 ?>)">  <!--Se manda el valor de la pagina actual menos uno cuando se elige la opción de regresar un lugar -->
+                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $grupos[$key_grupo - 1][0] ?>)">  <!--Se manda el valor de la pagina actual menos uno cuando se elige la opción de regresar un lugar -->
                             - </a>
                     </li>
                 <?php
@@ -96,16 +107,6 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                             - </a>
                     </li>
                     <?php
-                }
-
-                //Revisar a qué grupo pertenece la página actual
-                foreach ($grupos as $grupo) {       //Revisar los grupos 
-                    foreach ($grupo as $num) {      //Revisar los valores de cada grupo
-                        if ($pagina == $num) {      //Si la pagina actual es igual a un numero dentro del grupo, entonces encontramos el grupo actual
-                            $grupo_actual = $grupo;
-                            break;                  //Terminar los bucles foreach
-                        }
-                    }
                 }
 
                 //Mostrar las paginaciones pertenecientes al grupo actual
@@ -129,7 +130,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                 //OPCIONES PARA AVANZAR A LA ULTIMA PAGINA O AVANZAR UN LUGAR
                 if ($pagina < $cantidad_pag) { ?>   <!-- Si nuestra pagina es menor a la cantidad de paginas (no estamos en la ultima pagina) -->
                     <li class="page-item">  
-                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $pagina + 1 ?>)"> +</a>  <!--Se manda el valor de la pagina actual más uno cuando se elige la opción de avanzar un lugar -->
+                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= <?= $grupos[$key_grupo + 1][0] ?> ?>)"> +</a>  <!--Se manda el valor de la pagina actual más uno cuando se elige la opción de avanzar un lugar -->
                     </li>
                     <li class="page-item">
                         <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $cantidad_pag ?>)"> >></a> <!--Se manda el valor del total de paginas (en otras palabras la ultima pagina) cuando se elige la opción de ir al final -->
