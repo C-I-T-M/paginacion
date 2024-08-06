@@ -93,7 +93,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                     </li>
                     <li class="page-item">
                         <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $grupos[$key_grupo - 1][0] ?>)">  <!--Se manda el valor de la pagina actual menos uno cuando se elige la opción de regresar un lugar -->
-                            - </a>
+                            < </a>
                     </li>
                 <?php
                 } else { ?> <!-- Si nuestra pagina es 0 (estamos en la primera pagina) -->
@@ -130,7 +130,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                 //OPCIONES PARA AVANZAR A LA ULTIMA PAGINA O AVANZAR UN LUGAR
                 if ($pagina < $cantidad_pag) { ?>   <!-- Si nuestra pagina es menor a la cantidad de paginas (no estamos en la ultima pagina) -->
                     <li class="page-item">  
-                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= <?= $grupos[$key_grupo + 1][0] ?> ?>)"> +</a>  <!--Se manda el valor de la pagina actual más uno cuando se elige la opción de avanzar un lugar -->
+                        <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?=  $grupos[$key_grupo + 1][0] ?> )"> ></a>  <!--Se manda el valor de la pagina actual más uno cuando se elige la opción de avanzar un lugar -->
                     </li>
                     <li class="page-item">
                         <a onclick="javascript:mostrar_alta(document.getElementById('num_filas').value, <?= $cantidad_pag ?>)"> >></a> <!--Se manda el valor del total de paginas (en otras palabras la ultima pagina) cuando se elige la opción de ir al final -->
@@ -139,7 +139,7 @@ $grupos = array_chunk($grupos, 5);  //Utilizar array_chunk para separar todos lo
                 } else { ?> <!-- Si nuestra pagina es igual a la cantidad de paginas (ultima pagina) -->
                     <!-- Agregar la opcion disabled dentro del class de ambas opciones para que no puedan ser usadas-->
                     <li class="page-item disabled">
-                        <a> + </a>
+                        <a> > </a>
                     </li>
                     <li class="page-item disabled">
                         <a> >> </a>
